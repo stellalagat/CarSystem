@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About CarXchange</title>
+  <style>
+    :root {
+      --dark-blue: #0a192f;
+      --red-accent: #e63946;
+      --soft-blue: #1d3557;
+    }
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: linear-gradient(135deg, var(--dark-blue), var(--soft-blue));
+      color: #f5f5f5;
+    }
+    header {
+      background: var(--soft-blue);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
+    h1 {
+      color: var(--red-accent);
+      font-size: 1.5rem;
+    }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+    nav a {
+      color: #f5f5f5;
+      text-decoration: none;
+    }
+    nav a:hover {
+      color: var(--red-accent);
+    }
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-outline {
+      border: 1px solid var(--red-accent);
+      color: var(--red-accent);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: var(--red-accent);
+      color: white;
+    }
+    .btn-primary {
+      background: var(--red-accent);
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #d32f3f;
+    }
+    .about-hero {
+      position: relative;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: var(--dark-blue) url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64') center/cover;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1;
+    }
+    .about-hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+    }
+    .about-hero h2 {
+      font-size: 2.5rem;
+      color: var(--red-accent);
+      margin-bottom: 1rem;
+    }
+    .about-hero p {
+      font-size: 1.125rem;
+      color: #e5e7eb;
+      margin-bottom: 1.5rem;
+    }
+    .about-content {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+    }
+    .about-section {
+      background: var(--soft-blue);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      margin-bottom: 2rem;
+    }
+    .about-section h3 {
+      color: var(--red-accent);
+      margin-bottom: 1rem;
+    }
+    .about-section p {
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+    .mission-values {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .mission, .values {
+      background: var(--soft-blue);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .mission h3, .values h3 {
+      color: var(--red-accent);
+      margin-bottom: 1rem;
+    }
+    .mission p, .values p {
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+    .mission-vision {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .mission, .vision {
+      background: var(--soft-blue);
+      padding: 2rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .mission h3, .vision h3 {
+      color: var(--red-accent);
+      margin-bottom: 1rem;
+    }
+    .mission p, .vision p {
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+    .story-values {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .team {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 0 1.5rem;
+      text-align: center;
+    }
+    .team h3 {
+      color: var(--red-accent);
+      margin-bottom: 2rem;
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .team-member {
+      background: var(--soft-blue);
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .team-member img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+    }
+    .team-member h4 {
+      color: var(--red-accent);
+      margin-bottom: 0.5rem;
+    }
+    .team-member p {
+      color: #e5e7eb;
+      font-size: 0.875rem;
+    }
+    .cta {
+      max-width: 1200px;
+      margin: 4rem auto;
+      padding: 3rem 1.5rem;
+      text-align: center;
+      background: var(--soft-blue);
+      border-radius: 1rem;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .cta h3 {
+      color: var(--red-accent);
+      margin-bottom: 1rem;
+    }
+    .cta p {
+      color: #e5e7eb;
+      margin-bottom: 2rem;
+      font-size: 1.125rem;
+    }
+    footer {
+      background: var(--soft-blue);
+      color: #d1d5db;
+      margin-top: 5rem;
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .social-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.2rem;
+      text-decoration: none;
+      transition: transform 0.3s;
+    }
+    .social-icon:hover {
+      transform: scale(1.1);
+    }
+    .fb {
+      background: #1877f2;
+      color: white;
+    }
+    .tw {
+      background: #1da1f2;
+      color: white;
+    }
+    .ig {
+      background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+      color: white;
+    }
+    .li {
+      background: #0077b5;
+      color: white;
+    }
+    footer h4, footer h5 {
+      color: var(--red-accent);
+      margin-bottom: 0.5rem;
+    }
+    footer ul {
+      list-style: none;
+      padding: 0;
+    }
+    footer a {
+      color: #d1d5db;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: white;
+    }
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #374151;
+      padding: 1rem;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <h1>CarXchange</h1>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="#">Cars</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="buttons">
+        <button class="btn-outline">Sign In</button>
+        <button class="btn-primary">Sign Up</button>
+      </div>
+    </nav>
+  </header>
+
+  <section class="about-hero">
+    <div class="about-hero-content">
+      <h2>About CarXchange</h2>
+      <p>Your trusted partner for buying and hiring cars</p>
+    </div>
+  </section>
+
+  <section class="about-content">
+    <div class="story-values">
+      <div class="about-section">
+        <h3>Our Story</h3>
+        <p>CarXchange was founded in 2020 with a simple vision: to make car ownership and rental accessible, affordable, and hassle-free for everyone. Frustrated by the complexities of traditional car buying and rental processes, our founders set out to create a platform that puts customers first. What started as a small team with big dreams has grown into a trusted name in the automotive industry, serving thousands of satisfied customers across the region.</p>
+      </div>
+
+      <div class="about-section">
+        <h3>Core Values</h3>
+        <p><strong>Transparency:</strong> Clear pricing and honest communication.<br>
+        <strong>Quality:</strong> Only the best vehicles and services.<br>
+        <strong>Innovation:</strong> Leveraging technology for better experiences.<br>
+        <strong>Customer First:</strong> Your satisfaction is our priority.<br>
+        <strong>Sustainability:</strong> Promoting eco-friendly transportation options.</p>
+      </div>
+    </div>
+
+    <div class="mission-vision">
+      <div class="mission">
+        <h3>Our Mission</h3>
+        <p>To revolutionize the automotive industry by providing transparent, reliable, and customer-centric solutions for buying and renting vehicles. We strive to build lasting relationships with our customers through exceptional service and innovative technology.</p>
+      </div>
+      <div class="vision">
+        <h3>Our Vision</h3>
+        <p>To become the leading automotive marketplace that empowers people to make informed decisions about their transportation needs. We envision a future where car ownership and rental are seamless, sustainable, and accessible to all.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="team">
+    <h3>Meet Our Team</h3>
+    <div class="team-grid">
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" alt="CEO">
+        <h4>John Smith</h4>
+        <p>CEO & Founder<br>15+ years in automotive industry</p>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786" alt="COO">
+        <h4>Sarah Johnson</h4>
+        <p>COO<br>Expert in operations & customer experience</p>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e" alt="CTO">
+        <h4>Mike Chen</h4>
+        <p>CTO<br>Tech innovator driving our digital platform</p>
+      </div>
+      <div class="team-member">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80" alt="Head of Sales">
+        <h4>Emma Davis</h4>
+        <p>Head of Sales<br>Building partnerships across the industry</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h3>Ready to Get Started?</h3>
+    <p>Join thousands of satisfied customers who trust CarXchange for their automotive needs.</p>
+    <button class="btn-primary" onclick="window.location.href='index.html'">Explore Our Cars</button>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div>
+        <h4>CarXchange</h4>
+        <p>Your trusted partner for buying and hiring cars.</p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="#">Cars</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Follow Us</h5>
+        <div class="social-links">
+          <a href="#" class="social-icon fb">f</a>
+          <a href="#" class="social-icon tw">t</a>
+          <a href="#" class="social-icon ig">i</a>
+          <a href="#" class="social-icon li">in</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 CarXchange. All rights reserved.</p>
+    </div>
+  </footer>
+
+
+</body>
+</html>
