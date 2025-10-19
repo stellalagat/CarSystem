@@ -80,37 +80,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      overflow: hidden;
-    }
-    .hero-slider {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-    .hero-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-size: cover;
-      background-position: center;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
-    }
-    .hero-slide:nth-child(1) {
-      background-image: url('https://images.unsplash.com/photo-1502877338535-766e1452684a');
-    }
-    .hero-slide:nth-child(2) {
-      background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64');
-    }
-    .hero-slide:nth-child(3) {
-      background-image: url('https://images.unsplash.com/photo-1449824913935-59a10b8d2000');
-    }
-    .hero-slide:nth-child(4) {
-      background-image: url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13');
+      background: var(--dark-blue) url('https://images.unsplash.com/photo-1502877338535-766e1452684a') center/cover;
     }
     .hero::before {
       content: '';
@@ -120,11 +90,10 @@
       right: 0;
       bottom: 0;
       background: rgba(0,0,0,0.5);
-      z-index: 1;
     }
     .hero-content {
       position: relative;
-      z-index: 2;
+      z-index: 1;
       padding: 2rem;
     }
     .hero h2 {
@@ -169,17 +138,6 @@
       border-color: var(--red-accent);
       outline: none;
       box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.1);
-    }
-    .visually-hidden {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
     }
     .featured {
       max-width: 1200px;
@@ -541,7 +499,7 @@
         <li><a href="#">Cars for Hire</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="#">Contact</a></li>
-         <li><a href="#">FAQs</a></li>
+         <li><a href="#">FAQs---</a></li>
       </ul>
       <div class="buttons">
         <button class="btn-outline">Login</button>
@@ -551,12 +509,6 @@
   </header>
 
   <section class="hero">
-    <div class="hero-slider">
-      <div class="hero-slide"></div>
-      <div class="hero-slide"></div>
-      <div class="hero-slide"></div>
-      <div class="hero-slide"></div>
-    </div>
     <div class="hero-content">
       <h2>Buy or Hire Your Dream Car</h2>
       <p>Find the perfect car to purchase or rent — all in one platform.</p>
@@ -784,7 +736,7 @@
       <div>
         <h5>Quick Links</h5>
         <ul>
-          <li><a href="about.html">About</a></li>
+          <li><a href="#">About</a></li>
           <li><a href="#">Contact</a></li>
           <li><a href="#">FAQs</a></li>
           <li><a href="#">Privacy Policy</a></li>
@@ -807,163 +759,8 @@
       </div>
     </div>
     <div class="footer-bottom">
-      &copy; 2025 CarXchange. All rights reserved.
+      © 2025 CarXchange. All rights reserved.
     </div>
   </footer>
-
-  <script>
-    // Responsive Hero Slider
-    class HeroSlider {
-      constructor() {
-        this.container = document.querySelector('.hero');
-        this.slider = this.container ? this.container.querySelector('.hero-slider') : null;
-        this.slides = this.slider ? this.slider.querySelectorAll('.hero-slide') : [];
-        this.currentSlide = 0;
-        this.slideInterval = null;
-        this.slideDuration = 4000; // 4 seconds per slide
-
-        if (!this.container || !this.slider || this.slides.length === 0) {
-          return;
-        }
-
-        this.init();
-      }
-
-      init() {
-        // Show first slide
-        this.updateSlides();
-
-        // Start automatic sliding
-        this.startAutoSlide();
-
-        // Add touch/swipe support for mobile
-        this.addTouchSupport();
-
-        // Pause on hover
-        this.container.addEventListener('mouseenter', () => this.pause());
-        this.container.addEventListener('mouseleave', () => this.resume());
-
-        // Handle window resize
-        window.addEventListener('resize', () => this.handleResize());
-      }
-
-      startAutoSlide() {
-        if (!this.slides.length) {
-          return;
-        }
-
-        this.pause();
-        this.slideInterval = setInterval(() => {
-          this.nextSlide();
-        }, this.slideDuration);
-      }
-
-      nextSlide() {
-        if (!this.slides.length) {
-          return;
-        }
-
-        this.currentSlide = (this.currentSlide + 1) % this.slides.length;
-        this.updateSlides();
-      }
-
-      updateSlides() {
-        if (!this.slides.length) {
-          return;
-        }
-
-        this.slides.forEach((slide, index) => {
-          slide.style.opacity = index === this.currentSlide ? '1' : '0';
-        });
-      }
-
-      pause() {
-        clearInterval(this.slideInterval);
-      }
-
-      resume() {
-        this.startAutoSlide();
-      }
-
-      addTouchSupport() {
-        if (!this.slider) {
-          return;
-        }
-
-        let startX = 0;
-        let endX = 0;
-
-        this.slider.addEventListener('touchstart', (e) => {
-          startX = e.touches[0].clientX;
-          this.pause();
-        });
-
-        this.slider.addEventListener('touchend', (e) => {
-          endX = e.changedTouches[0].clientX;
-          this.handleSwipe(startX, endX);
-          this.resume();
-        });
-      }
-
-      handleSwipe(startX, endX) {
-        if (!this.slides.length) {
-          return;
-        }
-
-        const diff = startX - endX;
-        const threshold = 50; // minimum swipe distance
-
-        if (Math.abs(diff) > threshold) {
-          if (diff > 0) {
-            // Swipe left - next slide
-            this.nextSlide();
-          } else {
-            // Swipe right - previous slide
-            this.prevSlide();
-          }
-        }
-      }
-
-      prevSlide() {
-        if (!this.slides.length) {
-          return;
-        }
-
-        this.currentSlide = this.currentSlide === 0 ? this.slides.length - 1 : this.currentSlide - 1;
-        this.updateSlides();
-      }
-
-      handleResize() {
-        if (!this.slides.length) {
-          return;
-        }
-
-        // Ensure slides are properly sized on resize
-        this.slides.forEach(slide => {
-          slide.style.width = '100%';
-          slide.style.height = '100%';
-        });
-      }
-    }
-
-    // Global slider instance for keyboard navigation
-    let heroSliderInstance = null;
-
-    // Initialize slider when DOM is loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      heroSliderInstance = new HeroSlider();
-    });
-
-    // Add keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (!heroSliderInstance || !heroSliderInstance.slides.length) return;
-
-      if (e.key === 'ArrowLeft') {
-        heroSliderInstance.prevSlide();
-      } else if (e.key === 'ArrowRight') {
-        heroSliderInstance.nextSlide();
-      }
-    });
-  </script>
 </body>
 </html>
